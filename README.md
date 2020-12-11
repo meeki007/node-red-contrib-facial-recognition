@@ -69,42 +69,44 @@ You can change the msg property value that you send a buffered image of your cho
 ### Settings
 This is optional, you do not have to send it anything. Used to override settings.
 
-You can change the msg property value that you send a object of your choice to. Example: msg.NameOfYourChoice<br>
+You can change the msg property value that you send an object of your choice to. Example: msg.NameOfYourChoice<br>
 Sending a object to this msg property value will override any settings in the nodes config Properties menu. Great for using input messages to change settings on the fly.<br>
-Please see/inport the example Flow for better understanding.<br>
+Please see/inport the example Flow section of this documentation for better understanding.<br>
+Example:
 ```JS
-msg.settings =
-        {
-            FaceDetector :
-            {
-                SsdMobilenetv1 :
-                {
-                    maxResults : 4,
-                    minConfidence : 0.6
-                }
-            },
-            Tasks :
-            {
-                detectAllFaces :
-                {
-                    withFaceLandmarks : true,
-                    withFaceExpressions : true,
-                    withAgeAndGender : true,
-                    withFaceDescriptors : true
-                }
-            },
-            FaceRecognition :
-            {
-                enabled :
-                {
-                    KnownFacesPath : "/example/known_face",
-                    distanceThreshold : 0.6,
-                    ReInitializeFaceMatcher : false
-                }
-            }            
-        };
+msg.settings = {
+  FaceDetector :
+  {
+    SsdMobilenetv1 :
+    {
+      maxResults : 4,
+      minConfidence : 0.6
+    }
+  },
+  Tasks :
+  {
+    detectAllFaces :
+    {
+      withFaceLandmarks : true,
+      withFaceExpressions : true,
+      withAgeAndGender : true,
+      withFaceDescriptors : true
+    }
+  },
+  FaceRecognition :
+  {
+    enabled :
+    {
+      KnownFacesPath : "/example/known_face",
+      distanceThreshold : 0.6,
+      ReInitializeFaceMatcher : false
+    }
+  }            
+};
 return msg;
 ```
+You do not have to fill out every option. You can omit any object key and its value about and it will use the setting found in the nodes config Properties menu.
+
 Note: ReInitializeFaceMatcher<br>
 Set this value to <b>true</b> if you have changed/edited/added images or image folders to your KnownFacesPath to ReInitialize the FaceMatcher. Used to process all the images into Labeled Face Descriptors for each dir name and individual descriptions for images. Do not leave set to true! it takes significant time to process. Once its ran after you have made changes to images or image folder it is saved to context and used for Facial Recognition.
 
