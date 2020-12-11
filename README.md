@@ -4,7 +4,6 @@ node-red-contrib-facial-recognition
 
 
 <a href="http://nodered.org" target="_new">Node-RED</a> - Provides a node-red node for Facial Detection & Facial Recognition.
-
 ---
 
 ## Table of Contents
@@ -13,10 +12,10 @@ node-red-contrib-facial-recognition
 * [Usage](#usage)
 * [Node_Properties](#Node_Properties)
   * [Name](#Name)
-  * [digits](#digits)
-  * [letters](#letters)
-  * [lowercase](#lowercase)
-  * [uppercase](#uppercase)
+  * [Image](#Image)
+  * [Settings](#Settings)
+  * [Bindings](#Bindings)
+  * [FaceDetector](#FaceDetector)
   * [symbols](#symbols)
   * [spaces](#spaces)
   * [min](#min)
@@ -38,12 +37,14 @@ Run the following command in your Node-RED user directory - typically `~/.node-r
 ```
 node-red-contrib-facial-recognition
 ```
+---
 
 ## About
 
 At its core it uses [@vladmandic/face-api](https://www.npmjs.com/package/@vladmandic/face-api) and [@tensorflow/tfjs-node ver.2.7.x](https://www.npmjs.com/package/@tensorflow/tfjs-node) and it can use @tensorflow/tfjs-node-gpu for the CUDA crazy amongst you.
 
-vladmandic was a big help for us nodejs guys. After finding a bug and fielding questions, he took the time to make a nodejs build specific to tfjs-node. If you like this node-red-contrib-facial-recognition, I highly recommend you take the time to goto his github page [https://github.com/vladmandic/face-api](https://github.com/vladmandic/face-api) and throw this repo a star. This is the fastest solution without overhead for us nodejs guys.
+vladmandic was a big help for us nodejs guys. After finding a bug and fielding questions, he took the time to make a nodejs build specific to tfjs-node. If you like this node-red-contrib-facial-recognition, I highly recommend you take the time to goto his github page [https://github.com/vladmandic/face-api](https://github.com/vladmandic/face-api) and throw his repo a star. This is the fastest solution without overhead for us nodejs guys.
+---
 
 ## Usage
 
@@ -54,7 +55,7 @@ Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition
 <br>Face Expressions
 <br>Age & Gender Recognition
 <br>Face Recognition by Matching Descriptors
-
+---
 
 ## Node_Properties
 
@@ -64,12 +65,14 @@ Define the msg name if you wish to change the name displayed on the node.
 
 ### Image
 
-You can change the msg property value that you send a buffered image of your choice to. Example: msg.NameOfYourChoice
+You can change the msg property value that you send a buffered image of your choice to.<br>Example: msg.NameOfYourChoice
 
 ### Settings
-This is optional, you do not have to send it anything. Used to override settings.
+This is optional, you do not have to send it anything. Used to override settings in the nodes config Properties menu.
 
-You can change the msg property value that you send an object of your choice to. Example: msg.NameOfYourChoice<br>
+You can change the msg property value that you send an object of your choice to.<br>
+Example: msg.NameOfYourChoice
+
 Sending a object to this msg property value will override any settings in the nodes config Properties menu. Great for using input messages to change settings on the fly.<br>
 Please see/inport the example Flow section of this documentation for better understanding.<br>
 Example:
@@ -105,7 +108,7 @@ msg.settings = {
 };
 return msg;
 ```
-You do not have to fill out every option. You can omit any object key and its value about and it will use the setting found in the nodes config Properties menu.
+You do not have to fill out every option. You can omit any object key and its value. This node will then use the settings found in the nodes config Properties menu.
 
 Note: ReInitializeFaceMatcher<br>
 Set this value to <b>true</b> if you have changed/edited/added images or image folders to your KnownFacesPath to ReInitialize the FaceMatcher. Used to process all the images into Labeled Face Descriptors for each dir name and individual descriptions for images. Do not leave set to true! it takes significant time to process. Once its ran after you have made changes to images or image folder it is saved to context and used for Facial Recognition.
@@ -118,9 +121,19 @@ By default it is set to CPU - @tensorflow/tfjs-node, this will use your CPU to p
 
 Good luck.
 
-### Name
+### FaceDetector
 
-Define the msg name if you wish to change the name displayed on the node.
+SsdMobilenetv1 - A Single Shot Multibox Detector; based on MobileNetV1.<br>
+Computes the locations of each face in an image and returns the bounding boxes with it's probability for each face. High accuracy in detecting face bounding boxes at the cost of time to compute.<br>
+&emsp;&emsp;maxResults - The max number of faces to return<br>
+&emsp;&emsp;minConfidence - returns results for face(s) in a image above Confidence threshold
+
+tinyFaceDetector - a fast realtime face detector, and less resource consuming compared to the SSD Mobilenet V1 face detector. It is poor at detecting small faces. Best face detector on resource limited devices.<br>
+&emsp;&emsp;inputSize - size at which image is processed, the smaller the faster, <b>number must be divisible by 32</b>. Common sizes are 128, 160, 224, 320, 416, 512, 608<br>
+&emsp;&emsp;scoreThreshold - returns results for face(s) in a image above Confidence threshold
+
+
+
 
 ### digits
 
