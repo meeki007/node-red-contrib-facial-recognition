@@ -48,12 +48,12 @@ vladmandic was a big help for us nodejs guys. After finding a bug and fielding q
 ## Usage
 
 Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition to Detect:
-<br>&emsp;Faces in an image
-<br>&emsp;Facial landmarks
-<br>&emsp;Compute Face Descriptors
-<br>&emsp;Face Expressions
-<br>&emsp;Age & Gender Recognition
-<br>&emsp;Face Recognition by Matching Descriptors
+<br>&emsp;&emsp;Faces in an image
+<br>&emsp;&emsp;Facial landmarks
+<br>&emsp;&emsp;Compute Face Descriptors
+<br>&emsp;&emsp;Face Expressions
+<br>&emsp;&emsp;Age & Gender Recognition
+<br>&emsp;&emsp;Face Recognition by Matching Descriptors
 
 
 ## Node_Properties
