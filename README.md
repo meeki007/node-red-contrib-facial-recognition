@@ -130,16 +130,21 @@ Computes the locations of each face in an image and returns the bounding boxes w
 &emsp;&emsp;<b>inputSize</b> - size at which image is processed, the smaller the faster, <b>number must be divisible by 32</b>. Common sizes are 128, 160, 224, 320, 416, 512, 608<br>
 &emsp;&emsp;<b>scoreThreshold</b> - returns results for face(s) in a image above Confidence threshold
 
-
-
-
 ### Tasks
 
-xxx place holder xxx
+<b>detectAllFaces</b> - Utilize the selected FaceDetector to detect multiple faces in a buffered image sent in message by user<br>
+<b>detectSingleFace</b> - Utilize the selected FaceDetector to detect a single face in a buffered image sent in message by user. If image contains multiple faces it will only detect one of them, hopefully the highest probability one.<br>
+&emsp;&emsp;withFaceLandmarks - computes landmarks for each detected face(s)<br>
+&emsp;&emsp;withFaceExpressions - recognize face expressions of each face(s)<br>
+&emsp;&emsp;withAgeAndGender - estimate age and recognize gender of each face(s)<br>
+&emsp;&emsp;withFaceDescriptor - computes the face descriptors for each face(s)<br>
 
 ### FaceRecognition
 
-xxx place holder xxx
+<b>disabled</b> - Don't use any facial recognition<br>
+<b>enabled</b> - Performs face recognition, by comparing reference face descriptor(s) to determine the similarity to query face descriptor(s).<br>
+&emsp;&emsp;KnownFacesPath - The location of the main folder that contains all subfolders, labeled with persons name. Subfolders should contain close-up face images of the individual. The actual name if the file in this folder does not matter. Please look at the structure of the example folder for more understanding. The name of the subfolder is what is used to label the faces for facial recognition.<br>
+&emsp;&emsp;distanceThreshold - returns results based on measures of how far away, Euclidean distance of face descriptor, the user submitted image is compared to how far away, Euclidean distance of face descriptors, it is to all the faces found in the labeled subfolder that are above the distanceThreshold. <u>Simply put: return names for person if it is this distanceThreshold of confidant.</u> The lower the distanceThreshold is the more likely you are to get a incorrect match. The higher the distanceThreshold is the more likely it is that a person will not be recognized.
 
 ### KnownFacesPath
 
