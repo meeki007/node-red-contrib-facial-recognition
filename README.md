@@ -48,7 +48,7 @@ vladmandic was a big help for us nodejs guys. After finding a bug and fielding q
 ---
 ## Usage
 
-Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition to<br> Detect:
+Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition to Detect:
 <br>Faces in an image
 <br>Facial landmarks
 <br>Compute Face Descriptors
