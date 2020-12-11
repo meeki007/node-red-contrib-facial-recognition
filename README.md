@@ -18,8 +18,6 @@ node-red-contrib-facial-recognition
   * [Bindings](#Bindings)
   * [FaceDetector](#FaceDetector)
   * [FaceRecognition](#FaceRecognition)
-  * [KnownFacesPath](#KnownFacesPath)
-  * [distanceThreshold](#distanceThreshold)
 * [Example_Flows](#Example_Flows)
 * [Bugs / Feature request](#bugs--feature-request)
 * [License](#license)
@@ -46,13 +44,13 @@ vladmandic was a big help for us nodejs guys. After finding a bug and fielding q
 
 ## Usage
 
-Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition to Detect:
-<br>&emsp;&emsp;Faces in an image
-<br>&emsp;&emsp;Facial landmarks
-<br>&emsp;&emsp;Compute Face Descriptors
-<br>&emsp;&emsp;Face Expressions
-<br>&emsp;&emsp;Age & Gender Recognition
-<br>&emsp;&emsp;Face Recognition by Matching Descriptors
+Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition to Detect:<br>
+> - Faces in an image
+> - Facial landmarks
+> - Compute Face Descriptors
+> - Face Expressions
+> - Age & Gender Recognition
+> - Face Recognition by Matching Descriptors
 
 
 ## Node_Properties
@@ -123,36 +121,29 @@ Good luck.
 
 <b>SsdMobilenetv1</b> - A Single Shot Multibox Detector; based on MobileNetV1.<br>
 Computes the locations of each face in an image and returns the bounding boxes with it's probability for each face. High accuracy in detecting face bounding boxes at the cost of time to compute.<br>
-&emsp;&emsp;<b>maxResults</b> - The max number of faces to return<br>
-&emsp;&emsp;<b>minConfidence</b> - returns results for face(s) in a image above Confidence threshold
+> - maxResults - The max number of faces to return<br>
+> - minConfidence - returns results for face(s) in a image above Confidence threshold
 
 <b>tinyFaceDetector</b> - a fast realtime face detector, and less resource consuming compared to the SSD Mobilenet V1 face detector. It is poor at detecting small faces. Best face detector on resource limited devices.<br>
-&emsp;&emsp;<b>inputSize</b> - size at which image is processed, the smaller the faster, <b>number must be divisible by 32</b>. Common sizes are 128, 160, 224, 320, 416, 512, 608<br>
-&emsp;&emsp;<b>scoreThreshold</b> - returns results for face(s) in a image above Confidence threshold
+> - inputSize - size at which image is processed, the smaller the faster, <b>number must be divisible by 32</b>. Common sizes are 128, 160, 224, 320, 416, 512, 608<br>
+> - scoreThreshold - returns results for face(s) in a image above Confidence threshold
 
 ### Tasks
 
 <b>detectAllFaces</b> - Utilize the selected FaceDetector to detect multiple faces in a buffered image sent in message by user<br>
 <b>detectSingleFace</b> - Utilize the selected FaceDetector to detect a single face in a buffered image sent in message by user. If image contains multiple faces it will only detect one of them, hopefully the highest probability one.<br>
-&emsp;&emsp;withFaceLandmarks - computes landmarks for each detected face(s)<br>
-&emsp;&emsp;withFaceExpressions - recognize face expressions of each face(s)<br>
-&emsp;&emsp;withAgeAndGender - estimate age and recognize gender of each face(s)<br>
-&emsp;&emsp;withFaceDescriptor - computes the face descriptors for each face(s)<br>
+> - withFaceLandmarks - computes landmarks for each detected face(s)<br>
+> - withFaceExpressions - recognize face expressions of each face(s)<br>
+> - withAgeAndGender - estimate age and recognize gender of each face(s)<br>
+> - withFaceDescriptor - computes the face descriptors for each face(s)<br>
 
 ### FaceRecognition
 
 <b>disabled</b> - Don't use any facial recognition<br>
 <b>enabled</b> - Performs face recognition, by comparing reference face descriptor(s) to determine the similarity to query face descriptor(s).<br>
-&emsp;&emsp;KnownFacesPath - The location of the main folder that contains all subfolders, labeled with persons name. Subfolders should contain close-up face images of the individual. The actual name if the file in this folder does not matter. Please look at the structure of the example folder for more understanding. The name of the subfolder is what is used to label the faces for facial recognition.<br>
-&emsp;&emsp;distanceThreshold - returns results based on measures of how far away, Euclidean distance of face descriptor, the user submitted image is compared to how far away, Euclidean distance of face descriptors, it is to all the faces found in the labeled subfolder that are above the distanceThreshold. <u>Simply put: return names for person if it is this distanceThreshold of confidant.</u> The lower the distanceThreshold is the more likely you are to get a incorrect match. The higher the distanceThreshold is the more likely it is that a person will not be recognized.
+> - KnownFacesPath - The location of the main folder that contains all subfolders, labeled with persons name. Subfolders should contain close-up face images of the individual. The actual name if the file in this folder does not matter. Please look at the structure of the example folder for more understanding. The name of the subfolder is what is used to label the faces for facial recognition.<br>
+> - distanceThreshold - returns results based on measures of how far away, Euclidean distance of face descriptor, the user submitted image is compared to how far away, Euclidean distance of face descriptors, it is to all the faces found in the labeled subfolder that are above the distanceThreshold. <b>Simply put: return names for person if it is this distanceThreshold of confidence.</b> The lower the distanceThreshold is the more likely you are to get a incorrect match. The higher the distanceThreshold is the more likely it is that a person will not be recognized.
 
-### KnownFacesPath
-
-xxx place holder xxx
-
-### distanceThreshold
-
-xxx place holder xxx
 
 
 ## Example_Flows
