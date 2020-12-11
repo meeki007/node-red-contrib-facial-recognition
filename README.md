@@ -19,10 +19,10 @@ node-red-contrib-facial-recognition
   * [FaceDetector](#FaceDetector)
   * [FaceRecognition](#FaceRecognition)
 * [Example_Flows](#Example_Flows)
-* [Bugs / Feature request](#bugs--feature-request)
+* [Bugs_Feature_request](#Bugs_Feature_request)
 * [License](#license)
 * [Work](#work)
-* [Contributor_to_Project](#Contributor_of_Project)
+* [Contributor](#Contributor)
 
 ---
 
@@ -40,7 +40,8 @@ node-red-contrib-facial-recognition
 
 At its core it uses [@vladmandic/face-api](https://www.npmjs.com/package/@vladmandic/face-api) and [@tensorflow/tfjs-node ver.2.7.x](https://www.npmjs.com/package/@tensorflow/tfjs-node) and it can use @tensorflow/tfjs-node-gpu for the CUDA crazy amongst you.
 
-vladmandic was a big help for us nodejs guys. After finding a bug and fielding questions, he took the time to make a nodejs build specific to tfjs-node. If you like this node-red-contrib-facial-recognition, I highly recommend you take the time to goto his github page [https://github.com/vladmandic/face-api](https://github.com/vladmandic/face-api) and throw his repo a star. This is the fastest solution without overhead for us nodejs guys.
+vladmandic was a big help for us nodejs guys. After finding a bug and fielding questions, he took the time to make a nodejs build specific to tfjs-node. If you like this node-red-contrib-facial-recognition, I highly recommend you take the time to goto vladmandic's github page [https://github.com/vladmandic/face-api](https://github.com/vladmandic/face-api) and throw his repo a star.
+
 
 ## Usage
 
@@ -160,12 +161,14 @@ Please import this flow as an example of how to use.
 <br>
 
 
-## Bugs / Feature request
-Please [report](https://github.com/meeki007/node-red-contrib-ads1x15-raspi/issues) bugs and feel free to [ask](https://github.com/node-red-contrib-ads1x15-raspi/issues) for new features directly on GitHub.
+## Bugs_Feature_request
+Please [report](https://github.com/meeki007/node-red-contrib-facial-recognition/issues) bugs and feel free to [ask](https://github.com/node-red-contrib-facial-recognition/issues) for new features directly on GitHub.
 
 
 ## License
 This project is licensed under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0) license.
+
+All photos are free to use and provided by: [unsplash](https://unsplash.com/license).
 
 
 ## Work
@@ -176,18 +179,25 @@ _Need computers to flip switches?
 Contact me at meeki007@gmail.com
 
 
-## Contributor_to_Project
+## Contributor
 
-Thanks to [Tarun Batra AKA tarunbatra](https://github.com/tarunbatra/password-validator) for his work on password-validator. It made making this node for node-red possible.
+Thanks to:
+
+[The @tensorflow/tfjs-node team](https://github.com/tarunbatra/password-validator) for supporting and maintaining a repo that allows us JS guys to create cool stuff.
+
+[vladmandic and his @vladmandic/face-api](https://github.com/tarunbatra/password-validator) for help and support in creating a nodeJS specific build for the face-api.
+
+<b>protocolus</b> for his work on finding images for the user example.
+
+[Joshua Rondeau](https://unsplash.com/@liferondeau) for free use of his photos.
+
+[Brandon Atchison](https://unsplash.com/@b_atchison98) for free use of his photos.
 
 
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
-version 0.2.16 - First Public release
-<br>
-<br>
-version 0.2.17 - correct documentation linking names in MD file
+version 0.24.84 - First Public release
 <br>
 <br>
