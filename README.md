@@ -11,7 +11,7 @@ node-red-contrib-facial-recognition
 * [Install](#install)
 * [About](#About)
 * [Usage](#usage)
-* [Node Properties](#Node Properties)
+* [Node_Properties](#Node_Properties)
   * [Name](#Name)
   * [digits](#digits)
   * [letters](#letters)
@@ -56,7 +56,7 @@ Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition
 <br>Face Recognition by Matching Descriptors
 
 
-## Node Properties
+## Node_Properties
 
 ### Name
 
