@@ -17,10 +17,9 @@ node-red-contrib-facial-recognition
   * [Settings](#Settings)
   * [Bindings](#Bindings)
   * [FaceDetector](#FaceDetector)
-  * [symbols](#symbols)
-  * [spaces](#spaces)
-  * [min](#min)
-  * [max](#max)
+  * [FaceRecognition](#FaceRecognition)
+  * [KnownFacesPath](#KnownFacesPath)
+  * [distanceThreshold](#distanceThreshold)
 * [Example_Flows](#Example_Flows)
 * [Bugs / Feature request](#bugs--feature-request)
 * [License](#license)
@@ -107,12 +106,12 @@ msg.settings = {
 };
 return msg;
 ```
-You do not have to fill out every option. You can omit any object key and its value. This node will then use the settings found in the nodes config Properties menu.
+You do not have to fill out every option. You can omit any object key and its value. This node will then use the settings found in the nodes config Properties menu for that omitted object key and its value.
 
 <b>Note: ReInitializeFaceMatcher</b><br>
 Set this value to <b>true</b> if you have changed/edited/added images or image folders to your KnownFacesPath to ReInitialize the FaceMatcher. Used to process all the images into Labeled Face Descriptors for each dir name and individual descriptions for images. Do not leave set to true! it takes significant time to process. Once its ran after you have made changes to images or image folder it is saved to context and used for Facial Recognition.
 
-Else you can just re-deploy node-red and ReInitializeFaceMatcher will run one time only.
+Else you can just re-deploy node-red and ReInitializeFaceMatcher will run one time only on the first image you send.
 
 ### Bindings
 
@@ -134,37 +133,21 @@ Computes the locations of each face in an image and returns the bounding boxes w
 
 
 
-### digits
+### Tasks
 
-The number of digits, as an integer, the message string must contain to be valid.<br><u>Example:</u> A value of 2 requires that the message has two integers in its string to be valid. A value of 0 requires that the message has no integers in its string to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as many or none in the message string as you want.
+xxx place holder xxx
 
-### letters
+### FaceRecognition
 
-The number of letters, as an integer, the message string must contain to be valid.<br><u>Example:</u> A value of 2 requires that the message has two integers in its string to be valid. A value of 0 requires that the message has no integers in its string to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as many or none in the message string as you want.
+xxx place holder xxx
 
-### lowercase
+### KnownFacesPath
 
-The number of lowercase, as an integer, the message string must contain to be valid.<br><u>Example:</u> A value of 2 requires that the message has two integers in its string to be valid. A value of 0 requires that the message has no integers in its string to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as many or none in the message string as you want.
+xxx place holder xxx
 
-### uppercase
+### distanceThreshold
 
-The number of uppercase, as an integer, the message string must contain to be valid.<br><u>Example:</u> A value of 2 requires that the message has two integers in its string to be valid. A value of 0 requires that the message has no integers in its string to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as many or none in the message string as you want.
-
-### symbols
-
-The number of symbols, as an integer, the message string must contain to be valid.<br><u>Example:</u> A value of 2 requires that the message has two integers in its string to be valid. A value of 0 requires that the message has no integers in its string to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as many or none in the message string as you want.
-
-### spaces
-
-The number of spaces, as an integer, the message string must contain to be valid.<br><u>Example:</u> A value of 2 requires that the message has two integers in its string to be valid. A value of 0 requires that the message has no integers in its string to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as many or none in the message string as you want.
-
-### min
-
-The minimum length of the string, as an integer, the message string length must be to be valid.<br><u>Example:</u> A value of 8 requires that the message length must be at least 8 to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as short of a message string as you want.
-
-### max
-
-The maximum length of the string, as an integer, the message string length must be to be valid.<br><u>Example:</u> A value of 10 requires that the message cant be any longer than 10 to be valid. Leaving the field empty/blank will ignore the validation check, so you can have as long of a message string as you want.
+xxx place holder xxx
 
 
 ## Example_Flows
