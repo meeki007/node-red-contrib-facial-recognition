@@ -6,7 +6,6 @@ node-red-contrib-facial-recognition
 <a href="http://nodered.org" target="_new">Node-RED</a> Provides a node-red node for Facial Detection & Facial Recognition.
 
 ---
-
 ## Table of Contents
 * [Install](#install)
 * [About](#About)
@@ -29,7 +28,6 @@ node-red-contrib-facial-recognition
 * [Contributor_to_Project](#Contributor_of_Project)
 
 ---
-
 ## Install
 
 Install with node-red Palette Manager or,
@@ -39,14 +37,15 @@ Run the following command in your Node-RED user directory - typically `~/.node-r
 ```
 node-red-contrib-facial-recognition
 ```
----
 
+---
 ## About
 
 At its core it uses [@vladmandic/face-api](https://www.npmjs.com/package/@vladmandic/face-api) and [@tensorflow/tfjs-node ver.2.7.x](https://www.npmjs.com/package/@tensorflow/tfjs-node) and it can use @tensorflow/tfjs-node-gpu for the CUDA crazy amongst you.
 
 vladmandic was a big help for us nodejs guys. After finding a bug and fielding questions, he took the time to make a nodejs build specific to tfjs-node. If you like this node-red-contrib-facial-recognition, I highly recommend you take the time to goto his github page [https://github.com/vladmandic/face-api](https://github.com/vladmandic/face-api) and throw this repo a star. This is the fastest solution without overhead for us nodejs guys.
 
+---
 ## Usage
 
 Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition to<br> Detect:
