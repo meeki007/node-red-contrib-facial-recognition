@@ -45,7 +45,7 @@ vladmandic was a big help for us nodejs guys. After finding a bug and fielding q
 
 ## Usage
 
-Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition to Detect:<br>
+Takes a buffered image and runs TensorFlow Facial Detection and/or Facial Recognition to Detect:<br>
 > - Faces in an image
 > - Facial landmarks
 > - Compute Face Descriptors
@@ -152,7 +152,7 @@ Computes the locations of each face in an image and returns the bounding boxes w
 ![examplenode.png](./doc/examplenode.png)
 
 ```
-[{"id":"73c29dde.c5cc64","type":"password-validator","z":"a9e4b48d.e82d3","property":"payload","name":"","digits":"2","letters":"","lowercase":"","uppercase":"2","symbols":"2","spaces":"0","min":"10","max":"38","x":850,"y":220,"wires":[["7c253a1e.145744"]]},{"id":"86ad8c7f.0fab2","type":"inject","z":"a9e4b48d.e82d3","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":280,"y":200,"wires":[["b64bca70.6254f"]]},{"id":"7c253a1e.145744","type":"debug","z":"a9e4b48d.e82d3","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":810,"y":260,"wires":[]},{"id":"b64bca70.6254f","type":"change","z":"a9e4b48d.e82d3","name":"msg.payload = &!rf3Pl3YeNSq^a@bloL!a!J","rules":[{"t":"set","p":"payload","pt":"msg","to":"&!rf3Pl3YeNSq^a@bloL!a!J","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":550,"y":200,"wires":[["73c29dde.c5cc64"]]},{"id":"46bdb6bb.52347","type":"comment","z":"a9e4b48d.e82d3","name":"Good Password","info":"","x":460,"y":160,"wires":[]},{"id":"82f9cef1.16781","type":"inject","z":"a9e4b48d.e82d3","name":"","props":[{"p":"payload"},{"p":"topic","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"","payloadType":"date","x":280,"y":280,"wires":[["80722e1b.250948"]]},{"id":"80722e1b.250948","type":"change","z":"a9e4b48d.e82d3","name":"msg.payload = password","rules":[{"t":"set","p":"payload","pt":"msg","to":"password","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":490,"y":280,"wires":[["73c29dde.c5cc64"]]},{"id":"84b6fa87.9ce408","type":"comment","z":"a9e4b48d.e82d3","name":"Bad Password","info":"","x":450,"y":240,"wires":[]}]
+comming soon!
 ```
 
 <br>
@@ -196,6 +196,9 @@ Thanks to:
 
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.24.85 - Fix documentation, updating examples!
 <br>
 <br>
 version 0.24.84 - First Public release
