@@ -11,8 +11,7 @@ node-red-contrib-facial-recognition
 * [Install](#install)
 * [About](#About)
 * [Usage](#usage)
-  * [node_Properties](#node_Properties)
-  * [node_outputs](#node_outputs)
+* [Node Properties](#Node Properties)
   * [Name](#Name)
   * [digits](#digits)
   * [letters](#letters)
@@ -57,21 +56,65 @@ Takes a buffered image and runs TensorFlow Facial Detection & Facial Recognition
 <br>Face Recognition by Matching Descriptors
 
 
-### node_Properties
+## Node Properties
 
-Name : value will change default name of the node
+### Name
 
-Image : can change the msg property value to send a buffered image of your choice to msg.NameOfYourChoice
+Define the msg name if you wish to change the name displayed on the node.
 
-Settings : can change the msg propery value to send a object of your choice to msg.NameOfYourChoice
-&emsp;&emsp; dsfsdfsdfdfs
+### Image
 
+You can change the msg property value that you send a buffered image of your choice to. Example: msg.NameOfYourChoice
 
-Send a message string with the value you want to validate.
+### Settings
+This is optional, you do not have to send it anything. Used to override settings.
 
-### node_outputs
+You can change the msg property value that you send a object of your choice to. Example: msg.NameOfYourChoice<br>
+Sending a object to this msg property value will override any settings in the nodes config Properties menu. Great for using input messages to change settings on the fly.<br>
+Please see/inport the example Flow for better understanding.<br>
+```JS
+msg.settings =
+        {
+            FaceDetector :
+            {
+                SsdMobilenetv1 :
+                {
+                    maxResults : 4,
+                    minConfidence : 0.6
+                }
+            },
+            Tasks :
+            {
+                detectAllFaces :
+                {
+                    withFaceLandmarks : true,
+                    withFaceExpressions : true,
+                    withAgeAndGender : true,
+                    withFaceDescriptors : true
+                }
+            },
+            FaceRecognition :
+            {
+                enabled :
+                {
+                    KnownFacesPath : "/example/known_face",
+                    distanceThreshold : 0.6,
+                    ReInitializeFaceMatcher : false
+                }
+            }            
+        };
+return msg;
+```
+Note: ReInitializeFaceMatcher<br>
+Set this value to <b>true</b> if you have changed/edited/added images or image folders to your KnownFacesPath to ReInitialize the FaceMatcher. Used to process all the images into Labeled Face Descriptors for each dir name and individual descriptions for images. Do not leave set to true! it takes significant time to process. Once its ran after you have made changes to images or image folder it is saved to context and used for Facial Recognition.
 
-Outputs a message object with the value of your input and if it is valid. If not valid will also list an array of the failed checks
+Else you can just re-deploy node-red and ReInitializeFaceMatcher will run one time only.
+
+### Bindings
+
+By default it is set to CPU - @tensorflow/tfjs-node, this will use your CPU to process images. However you may choose to install [@tensorflow/tfjs-node-gpu](https://www.npmjs.com/package/@tensorflow/tfjs-node) to utilize your video card to process images. This is not an easy process to get CUDA working. However if you go down this rabbit hole the benefits in time to process images are significant.
+
+Good luck.
 
 ### Name
 
