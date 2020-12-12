@@ -253,6 +253,13 @@ Thanks to:
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
+version 0.25.89 - bug - UnhandledPromiseRejection - added catch to handle these
+<br>
+<br>
+<br>
+version 0.25.88 - added error checks for user submiting bad/unkown images to the folder or as msg.input
+<br>
+<br>
 version 0.24.88 - typo fix in documentation
 <br>
 <br>
