@@ -5,7 +5,7 @@ node-red-contrib-facial-recognition
 
 <a href="http://nodered.org" target="_new">Node-RED</a> - Provides a node-red node for Facial Detection & Facial Recognition.
 
-![image.jpg](./doc/image.jpg)  Heavy_image_processing_or_mjpeg_video_stream
+![image.jpg](./doc/image.jpg)
 
 ---
 
@@ -251,6 +251,12 @@ Thanks to:
 
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.24.88 - typo fix in documentation
+<br>
+<br>
+version 0.24.87 - added Heavy_image_processing_or_mjpeg_video_stream section and example for it
 <br>
 <br>
 version 0.24.86 - Fix documentation, added examples and intro image to top of page.
