@@ -1,0 +1,45 @@
+{
+    "name": "node-red-contrib-facial-recognition",
+    "version": "0.24.86",
+    "description": "Provides a node-red node for password validation; checks that a password meets your defined requierments.",
+    "dependencies": {
+      "@vladmandic/face-api": "^0.9.1",
+      "@tensorflow/tfjs-node": "~2.7.0"
+    },
+    "directories": {
+      "doc": "doc",
+      "icons": "icons"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "node-red": {
+      "nodes": {
+        "facial-recognition": "facial-recognition.js"
+      }
+    },
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/meeki007/node-red-contrib-facial-recognition.git"
+    },
+    "keywords": [
+      "node-red",
+      "facial recognition",
+      "face recognition",
+      "face",
+      "facial",
+      "face detector",
+      "face detection",
+      "biometrics",
+      "face-api",
+      "tensorflow",
+      "tensorflowJS",
+      "ID"
+    ],
+    "author": "David 'Meeki007' Burrows",
+    "license": "Apache-2.0",
+    "bugs": {
+      "url": "https://github.com/meeki007/node-red-contrib-facial-recognition/issues"
+    },
+    "homepage": "https://github.com/meeki007/node-red-contrib-facial-recognition#readme"
+}

@@ -1,0 +1,214 @@
+<script type="text/x-red" data-template-name="facial-recognition">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-image"><i class="fa fa-ellipsis-h"></i> Image</label>
+        <input type="text" id="node-input-image" placeholder="payload" style="width:calc(70% - 1px)">
+    </div>
+    <div class="form-row">
+        <label for="node-input-settings"><i class="fa fa-ellipsis-h"></i> Settings</label>
+        <input type="text" id="node-input-settings" placeholder="settings" style="width:calc(70% - 1px)">
+    </div>
+    <div class="form-row">
+        <label for="node-input-bindings"><i class="fa fa-cog"></i> Bindings</label>
+        <select id="node-input-bindings" style="width: 70%">
+            <option value="CPU">CPU - @tensorflow/tfjs-node</option>
+            <option value="GPU">GPU - @tensorflow/tfjs-node-gpu</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-FaceDetector"><i class="fa fa-cog"></i> FaceDetector</label>
+        <select id="node-input-FaceDetector" style="width: 70%">
+            <option value="SsdMobilenetv1">SsdMobilenetv1</option>
+            <option value="tinyFaceDetector">tinyFaceDetector</option>
+        </select>
+    </div>
+    <div class="form-row node-type-FaceDetector_SsdMobilenetv1">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label>maxResults</label>
+        &emsp;<input type="text" id="node-input-FaceDetector_SsdMobilenetv1_maxResults" style="width:calc(10% - 1px)"/>&nbsp;(1-100)
+    </div>
+    <div class="form-row node-type-FaceDetector_SsdMobilenetv1">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label>minConfidence</label>
+        &emsp;<input type="text" id="node-input-FaceDetector_SsdMobilenetv1_minConfidence" style="width:calc(10% - 1px)"/>&nbsp;(0-1)
+    </div>
+    <div class="form-row node-type-FaceDetector_tinyFaceDetector">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label>inputSize</label>
+        &emsp;<input type="text" id="node-input-FaceDetector_tinyFaceDetector_inputSize" style="width:calc(10% - 1px)"/>&nbsp;(32-1024)
+    </div>
+    <div class="form-row node-type-FaceDetector_tinyFaceDetector">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label>scoreThreshold</label>
+        &emsp;<input type="text" id="node-input-FaceDetector_tinyFaceDetector_scoreThreshold" style="width:calc(10% - 1px)"/>&nbsp;(0-1)
+    </div>
+    <div class="form-row">
+        <label for="node-input-Tasks"><i class="fa fa-cog"></i> Tasks</label>
+        <select id="node-input-Tasks" style="width: 70%">
+            <option value="detectAllFaces">detectAllFaces</option>
+            <option value="detectSingleFace">detectSingleFace</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-FaceLandmarks"></label>
+        <input type="checkbox" id="node-input-FaceLandmarks" style="display: inline-block; width: auto; vertical-align: top;"/>&nbsp;withFaceLandmarks
+    </div>
+    <div class="form-row">
+        <label for="node-input-FaceExpressions"></label>
+        <input type="checkbox" id="node-input-FaceExpressions" style="display: inline-block; width: auto; vertical-align: top;"/>&nbsp;withFaceExpressions
+    </div>
+    <div class="form-row">
+        <label for="node-input-AgeAndGender"></label>
+        <input type="checkbox" id="node-input-AgeAndGender" style="display: inline-block; width: auto; vertical-align: top;"/>&nbsp;withAgeAndGender
+    </div>
+    <div class="form-row">
+        <label for="node-input-FaceDescriptors"></label>
+        <input type="checkbox" id="node-input-FaceDescriptors" style="display: inline-block; width: auto; vertical-align: top;"/>&nbsp;withFaceDescriptor(s)
+    </div>
+    <br>
+    <div class="form-row">
+        <label for="node-input-Face_Recognition">FaceRecognition</label>
+        &emsp;&emsp;<select id="node-input-Face_Recognition" style="width:calc(70% - 35px)">
+            <option value="Face_Recognition_disabled">disabled</option>
+            <option value="Face_Recognition_enabled">enabled</option>
+        </select>
+    </div>
+    <div class="form-row node-type-Face_Recognition_enabled">
+        <label>KnownFacesPath:</label>
+        &emsp;&emsp;<input type="text" id="node-input-Face_Recognition_enabled_path" style="width:calc(70% - 1px)"/>
+    </div>
+    <div class="form-row node-type-Face_Recognition_enabled">
+        <label>distanceThreshold:</label>
+        &emsp;&emsp;<input type="text" id="node-input-Face_Recognition_distanceThreshold" style="width:calc(10% - 1px)"/>&nbsp;(0-1)
+    </div>
+
+
+
+
+
+</script>
+
+<script type="text/html" data-help-name="facial-recognition">
+  <p>Provides a node-red node for Facial Detection & Facial Recognition.</p>
+
+<h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">buffered image</span>
+        </dt>
+        <dd> Takes a buffered image and runs TensorFlow Facial Detection and/or Facial Recognition. </dd>
+        <dt class="optional">settings <span class="property-type">object</span></dt>
+        <dd> This is optional, you do not have to send it anything. Used to override settings in the nodes config Properties menu.</dd>
+    </dl>
+
+ <h3>Outputs</h3>
+     <ol class="node-ports">
+         <li>Standard output
+             <dl class="message-properties">
+                 <dt>payload <span class="property-type">object</span></dt>
+                 <dd>object containing processed TensorFlow and other values.</dd>
+             </dl>
+         </li>
+     </ol>
+
+<h3>References</h3>
+    <ul>
+      <li><a href="https://github.com/meeki007/node-red-contrib-facial-recognition/" target="_blank">Full Documentation</a> for this node. Here you will finde examples and explinations on how to use every aspect of this node.</li>
+    </ul>
+
+</script>
+
+
+
+<script type="text/javascript">
+    RED.nodes.registerType('facial-recognition',{
+        category: 'function',
+        color: "#00abb0",
+        defaults: {
+            image: {value:"payload",required:true},
+            settings: {value:"settings",required:true},
+            name: {value:""},
+            bindings: {value:"CPU"},
+            FaceDetector: {value:"SsdMobilenetv1"},
+            //FaceDetector_SsdMobilenetv1
+            FaceDetector_SsdMobilenetv1_maxResults: {value:3,validate:RED.validators.number()},
+            FaceDetector_SsdMobilenetv1_minConfidence: {value:0.5,validate:RED.validators.number()},
+            //FaceDetector_tinyFaceDetector
+            FaceDetector_tinyFaceDetector_inputSize: {value:416,validate:RED.validators.number()},
+            FaceDetector_tinyFaceDetector_scoreThreshold: {value:0.5,validate:RED.validators.number()},
+            Tasks: {value:"detectAllFaces"},
+            FaceLandmarks: {value: false,required:true},
+            FaceExpressions: {value: false,required:true},
+            AgeAndGender: {value: false,required:true},
+            FaceDescriptors: {value: false,required:true},
+            Face_Recognition: {value:"Face_Recognition_disabled"},
+            //Face_Recognition_enabled
+            Face_Recognition_enabled_path: {value:'/example/labeled_face'},
+            Face_Recognition_distanceThreshold: {value:0.7,validate:RED.validators.number()},
+
+
+
+
+        },
+        paletteLabel: 'facial-recognition',
+        inputs:1,
+        outputs:1,
+        icon: "facial-recognition.png",
+        label: function() {
+            return this.name||"facial-recognition";
+        },
+        oneditprepare: function() {
+            // defaults
+            //set depfault value for propery if undefined, else use user defined
+            if (this.image === undefined)
+            {
+                $("#node-input-image").val("payload");
+            }
+            $("#node-input-image").typedInput({default:'msg',types:['msg']});
+            //set depfault value for settings if undefined, else use user defined
+            if (this.settings === undefined)
+            {
+                $("#node-input-settings").val("settings");
+            }
+            $("#node-input-settings").typedInput({default:'msg',types:['msg']});
+            //set default selection for dropdown of node-input-bindings
+            this.bindings = !this.bindings ? "CPU" : this.bindings;
+
+            //set default selection for dropdown of node-input-FaceDetector
+            this.FaceDetector = !this.FaceDetector ? "SsdMobilenetv1" : this.FaceDetector;
+            //show selection hide other
+            $("#node-input-FaceDetector").change(function()
+            {
+              if ($(this).val() == "tinyFaceDetector")
+              {
+                $(".node-type-FaceDetector_SsdMobilenetv1").hide();
+                $(".node-type-FaceDetector_tinyFaceDetector").show();
+              }
+              else
+              {
+                $(".node-type-FaceDetector_SsdMobilenetv1").show();
+                $(".node-type-FaceDetector_tinyFaceDetector").hide();
+              }
+            });
+
+            //set default selection for dropdown of node-input-Tasks
+            this.Tasks = !this.Tasks ? "detectAllFaces" : this.Tasks;
+            //set default selection for dropdown of node-input-Face_Recognition
+            this.Face_Recognition = !this.Face_Recognition ? "disabled" : this.Face_Recognition;
+            //show selection hide other
+            $("#node-input-Face_Recognition").change(function()
+            {
+              if ($(this).val() == "Face_Recognition_disabled")
+              {
+                $(".node-type-Face_Recognition_enabled").hide();
+              }
+              else
+              {
+                $(".node-type-Face_Recognition_enabled").show();
+              }
+            });
+
+        }
+    });
+</script>
