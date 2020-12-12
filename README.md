@@ -166,6 +166,9 @@ Computes the locations of each face in an image and returns the bounding boxes w
 [node-red-node-annotate-image](https://flows.nodered.org/node/node-red-node-annotate-image)
 
 [node-red-contrib-image-output](https://flows.nodered.org/node/node-red-contrib-image-output)
+<br>
+<br>
+<br>
 
 
 ![advanced_example.png](./doc/advanced_example.jpg)
