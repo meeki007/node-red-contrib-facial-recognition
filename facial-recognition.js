@@ -298,12 +298,18 @@ module.exports = function(RED)
       //function to work with buffered image in from msg payload
       async function image(buffer)
       {
-        const decoded = tf.node.decodeImage(buffer);
-        const casted = decoded.toFloat();
-        const result = casted.expandDims(0);
-        decoded.dispose();
-        casted.dispose();
-        return result;
+
+        try {
+          const decoded = tf.node.decodeImage(buffer);
+          const casted = decoded.toFloat();
+          const result = casted.expandDims(0);
+          decoded.dispose();
+          casted.dispose();
+          return result;
+        } catch (error) {
+          notify_user_errors(error);
+        }
+
       }
 
       async function listDirectories(rootPath)
@@ -348,21 +354,29 @@ module.exports = function(RED)
                 notify_user_errors('Face_Recognition: Image File a bit large. Greater than 512kB.  Image was loaded but suggest reduced file size ' + image_names_in_each_dir_name[i]);
                 const bufferd_img = await fs.readFileSync(image_names_in_each_dir_name[i]);
                 const face_detect_tensor = await image(bufferd_img);
-                const detections = await faceapi.detectSingleFace(face_detect_tensor).withFaceLandmarks().withFaceDescriptor();
-                //make dang sure that a face was detected and a descriptor was created.
-                //else a undefined value sent to the descriptions array causes new faceapi.LabeledFaceDescriptors(each_dir_name, descriptions); to fail
-                if ( detections )
+                var detections;
+                if ( face_detect_tensor )
                 {
-                  if ( detections.descriptor )
+                  detections = await faceapi.detectSingleFace(face_detect_tensor).withFaceLandmarks().withFaceDescriptor();
+                  //make dang sure that a face was detected and a descriptor was created.
+                  //else a undefined value sent to the descriptions array causes new faceapi.LabeledFaceDescriptors(each_dir_name, descriptions); to fail
+                  if ( detections )
                   {
-                    descriptions.push(detections.descriptor);
+                    if ( detections.descriptor )
+                    {
+                      descriptions.push(detections.descriptor);
+                      face_detect_tensor.dispose();
+                    }
+                  }
+                  else
+                  {
+                    notify_user_errors('Unable to create FaceDescriptor. Please replace this image with a face that can be found. Did not load this image ' + image_names_in_each_dir_name[i]);
                     face_detect_tensor.dispose();
                   }
                 }
                 else
                 {
-                  notify_user_errors('Unable to create FaceDescriptor. Please replace this image with a face that can be found. Did not load this image ' + image_names_in_each_dir_name[i]);
-                  face_detect_tensor.dispose();
+                  notify_user_errors('unable to decode file ' + image_names_in_each_dir_name[i]);
                 }
               }
               else
@@ -370,21 +384,29 @@ module.exports = function(RED)
 
                 const bufferd_img = await fs.readFileSync(image_names_in_each_dir_name[i]);
                 const face_detect_tensor = await image(bufferd_img);
-                const detections = await faceapi.detectSingleFace(face_detect_tensor).withFaceLandmarks().withFaceDescriptor();
-                //make dang sure that a face was detected and a descriptor was created.
-                //else a undefined value sent to the descriptions array causes new faceapi.LabeledFaceDescriptors(each_dir_name, descriptions); to fail
-                if ( detections )
+                var detections;
+                if ( face_detect_tensor )
                 {
-                  if ( detections.descriptor )
+                  detections = await faceapi.detectSingleFace(face_detect_tensor).withFaceLandmarks().withFaceDescriptor();
+                  //make dang sure that a face was detected and a descriptor was created.
+                  //else a undefined value sent to the descriptions array causes new faceapi.LabeledFaceDescriptors(each_dir_name, descriptions); to fail
+                  if ( detections )
                   {
-                    descriptions.push(detections.descriptor);
+                    if ( detections.descriptor )
+                    {
+                      descriptions.push(detections.descriptor);
+                      face_detect_tensor.dispose();
+                    }
+                  }
+                  else
+                  {
+                    notify_user_errors('Unable to create FaceDescriptor. Please replace this image with a face that can be found. Did not load this image ' + image_names_in_each_dir_name[i]);
                     face_detect_tensor.dispose();
                   }
                 }
                 else
                 {
-                  notify_user_errors('Unable to create FaceDescriptor. Please replace this image with a face that can be found. Did not load this image ' + image_names_in_each_dir_name[i]);
-                  face_detect_tensor.dispose();
+                  notify_user_errors('unable to decode file ' + image_names_in_each_dir_name[i]);
                 }
               }
             }
@@ -652,11 +674,9 @@ module.exports = function(RED)
           }
         }
 
-
         // load image from payload
-        const tensor = await image(img).catch(error => {
-          notify_user_errors("Input Buffer " + error);
-        });
+        const tensor = await image(img);
+
 
         /////////////////////////////////////////////////////////////////
         // add check image size for inputs mabye if too large??? hold off on this
@@ -740,92 +760,99 @@ module.exports = function(RED)
         }
         model_eval = model_eval + ';';
         //msg.model_eval = model_eval;
-
-
         var result;
-        try {
-          // actual model execution for image send via msg payload
-          result = await eval(model_eval);
-        }
-        catch (error)
+        if ( tensor )
+        {
+          try {
+            // actual model execution for image send via msg payload
+            result = await eval(model_eval);
+          }
+          catch (error)
           {
             notify_user_errors(error);
           }
-        //var result = await eval(model_eval);
 
-        //garbage colletion
-        tensor.dispose();
+          tensor.dispose();
 
-        //check if user wants to do Face_Recognition
-        //FaceRecognition for node set via node properties
-        if ( this.Face_Recognition === 'Face_Recognition_enabled' )
-        {
-          //error check that withFaceDescriptor(s) must be enabled to use FaceRecognition
-          if ( this.FaceDescriptors === false || this.FaceLandmarks === false )
+          //check if user wants to do Face_Recognition
+          //FaceRecognition for node set via node properties
+          if ( this.Face_Recognition === 'Face_Recognition_enabled' )
           {
-            notify_user_errors('FaceRecognition Error: must enable withFaceDescriptor(s) and withFaceLandmarks to use FaceRecognition');
-            //send what was done
-          }
-          else
-          {
-            //see if user wants to ReInitializeFaceMatcher
-            const context_FaceMatcherInitialized = nodeContext.get('FaceMatcherInitialized') || false;
-            //context_previous_faceMatcher false or context_FaceMatcherInitialized
-            if ( context_previous_faceMatcher === false || context_FaceMatcherInitialized === false )
+            //error check that withFaceDescriptor(s) must be enabled to use FaceRecognition
+            if ( this.FaceDescriptors === false || this.FaceLandmarks === false )
             {
-              //check if example path else use user defined dirPath
-              var user_path;
-              if ( this.Face_Recognition_enabled_path === '/example/labeled_face' )
+              notify_user_errors('FaceRecognition Error: must enable withFaceDescriptor(s) and withFaceLandmarks to use FaceRecognition');
+              //send what was done
+            }
+            else
+            {
+              //see if user wants to ReInitializeFaceMatcher
+              const context_FaceMatcherInitialized = nodeContext.get('FaceMatcherInitialized') || false;
+              //context_previous_faceMatcher false or context_FaceMatcherInitialized
+              if ( context_previous_faceMatcher === false || context_FaceMatcherInitialized === false )
               {
-                user_path = path.join(__dirname, '/example/labeled_face');
+                //check if example path else use user defined dirPath
+                var user_path;
+                if ( this.Face_Recognition_enabled_path === '/example/labeled_face' )
+                {
+                  user_path = path.join(__dirname, '/example/labeled_face');
+                }
+                else
+                {
+                  user_path = this.Face_Recognition_enabled_path;
+                }
+                var list_dirs_in_labeled_face_folder = await listDirectories(user_path).catch(error => {
+                  notify_user_errors(error);
+                });
+                //msg.dirs = list_dirs_in_labeled_face_folder;
+
+                // get just the names of the dirs
+                var list_dirs_in_labeled_face_folder_names_only = list_dirs_in_labeled_face_folder.map(x => {
+                  var n = x.lastIndexOf('/');
+                  var result = x.substring(n + 1);
+                  return result;
+                });
+                //msg.dirs_names_only =list_dirs_in_labeled_face_folder_names_only;
+
+                const labeledFaceDescriptors = await LoadLabeledImages();
+                //msg.labeledFaceDescriptors = labeledFaceDescriptors;
+
+                const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, this.Face_Recognition_distanceThreshold);
+                nodeContext.set('faceMatcher',faceMatcher);
+                nodeContext.set('FaceMatcherInitialized',true);
+                //msg.faceMatcher = faceMatcher;
               }
-              else
+              var faceMatcher = nodeContext.get('faceMatcher');
+
+
+              //sort detections single/multiple faces
+              if ( this.Tasks === 'detectAllFaces' )
               {
-                user_path = this.Face_Recognition_enabled_path;
+                result = result.map(fd => {
+                  const the_object = fd;
+                  //add the match to the object
+                  the_object.match = faceMatcher.findBestMatch(fd.descriptor);
+
+                  return the_object;
+                });
               }
-              var list_dirs_in_labeled_face_folder = await listDirectories(user_path).catch(error => {
-                notify_user_errors(error);
-              });
-              //msg.dirs = list_dirs_in_labeled_face_folder;
+              if ( this.Tasks === 'detectSingleFace' )
+              {
+                result.match = faceMatcher.findBestMatch(result.descriptor);
+              }
 
-              // get just the names of the dirs
-              var list_dirs_in_labeled_face_folder_names_only = list_dirs_in_labeled_face_folder.map(x => {
-                var n = x.lastIndexOf('/');
-                var result = x.substring(n + 1);
-                return result;
-              });
-              //msg.dirs_names_only =list_dirs_in_labeled_face_folder_names_only;
-
-              const labeledFaceDescriptors = await LoadLabeledImages();
-              //msg.labeledFaceDescriptors = labeledFaceDescriptors;
-
-              const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, this.Face_Recognition_distanceThreshold);
-              nodeContext.set('faceMatcher',faceMatcher);
-              nodeContext.set('FaceMatcherInitialized',true);
-              //msg.faceMatcher = faceMatcher;
-            }
-            var faceMatcher = nodeContext.get('faceMatcher');
-
-
-            //sort detections single/multiple faces
-            if ( this.Tasks === 'detectAllFaces' )
-            {
-              result = result.map(fd => {
-                const the_object = fd;
-                //add the match to the object
-                the_object.match = faceMatcher.findBestMatch(fd.descriptor);
-
-                return the_object;
-              });
-            }
-            if ( this.Tasks === 'detectSingleFace' )
-            {
-              result.match = faceMatcher.findBestMatch(result.descriptor);
             }
 
           }
-
         }
+        else
+        {
+          notify_user_errors("Input Error: buffered imagae sent is not of valid type. Please send a valid image");
+        }
+
+
+
+
         //time to complete process
         const time_elap_millis = Date.now() - start;
         //msg.TimeToCompleteInSec = (time_elap_millis / 1000);
