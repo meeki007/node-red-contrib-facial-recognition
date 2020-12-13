@@ -253,7 +253,10 @@ Thanks to:
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
-version 0.26.89 - Removed eval and other optimizations 
+version 0.26.90 - bug - file location fix
+<br>
+<br>
+version 0.26.89 - Removed eval and other optimizations
 <br>
 <br>
 version 0.25.89 - bug - UnhandledPromiseRejection - added catch to handle these
