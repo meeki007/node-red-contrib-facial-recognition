@@ -253,29 +253,32 @@ Thanks to:
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
+version 0.26.91 - bug/new_feature - zenofmud submitted fix for MacOS .DS_Store file removal from folders, and a spelling error
+<br>
+<br>
 version 0.26.90 - bug - file location fix
 <br>
 <br>
-version 0.26.89 - Removed eval and other optimizations
+version 0.26.89 - new_feature - Removed eval and other optimizations
 <br>
 <br>
 version 0.25.89 - bug - UnhandledPromiseRejection - added catch to handle these
 <br>
 <br>
 <br>
-version 0.25.88 - added error checks for user submiting bad/unkown images to the folder or as msg.input
+version 0.25.88 - new_feature -added error checks for user submiting bad/unkown images to the folder or as msg.input
 <br>
 <br>
-version 0.24.88 - typo fix in documentation
+version 0.24.88 - bug -typo fix in documentation
 <br>
 <br>
-version 0.24.87 - added Heavy_image_processing_or_mjpeg_video_stream section and example for it
+version 0.24.87 - documentation - added Heavy_image_processing_or_mjpeg_video_stream section and example for it
 <br>
 <br>
-version 0.24.86 - Fix documentation, added examples and intro image to top of page.
+version 0.24.86 - documentation - Fix documentation, added examples and intro image to top of page.
 <br>
 <br>
-version 0.24.85 - Fix documentation, updating examples!
+version 0.24.85 - documentation - Fix documentation, updating examples!
 <br>
 <br>
 version 0.24.84 - First Public release
