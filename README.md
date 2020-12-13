@@ -247,6 +247,8 @@ Thanks to:
 
 [Brandon Atchison](https://unsplash.com/@b_atchison98) for free use of his photos.
 
+[zenofmud](https://discourse.nodered.org/u/zenofmud/summary) for bug fixes and new feature.
+
 ---
 
 ## release notes ##
