@@ -283,6 +283,9 @@ module.exports = function(RED)
     var node = this;
     this.on('input', async function(msg, send, done)
     {
+      //process.on('unhandledRejection', function(error) {
+      //  notify_user_errors(error);
+      //});
 
 
       //Start timmer
@@ -371,7 +374,6 @@ module.exports = function(RED)
                   else
                   {
                     notify_user_errors('Unable to create FaceDescriptor. Please replace this image with a face that can be found. Did not load this image ' + image_names_in_each_dir_name[i]);
-                    face_detect_tensor.dispose();
                   }
                 }
                 else
@@ -401,7 +403,6 @@ module.exports = function(RED)
                   else
                   {
                     notify_user_errors('Unable to create FaceDescriptor. Please replace this image with a face that can be found. Did not load this image ' + image_names_in_each_dir_name[i]);
-                    face_detect_tensor.dispose();
                   }
                 }
                 else
@@ -715,22 +716,24 @@ module.exports = function(RED)
             }
         }
 
+
+
         //setup var for eval for model execution based on user input(s)
-        var model_eval = 'faceapi[this.Tasks](tensor, options)';
+        var model_array = [];
         //withFaceLandmarks
         if ( this.FaceLandmarks === true )
         {
-          model_eval = model_eval + '.withFaceLandmarks()';
+          model_array.push('withFaceLandmarks');
         }
         //withFaceExpressions
         if ( this.FaceExpressions === true )
         {
-          model_eval = model_eval + '.withFaceExpressions()';
+          model_array.push('withFaceExpressions');
         }
         //withAgeAndGender
         if ( this.AgeAndGender === true )
         {
-          model_eval = model_eval + '.withAgeAndGender()';
+          model_array.push('withAgeAndGender');
         }
         //withFaceDescriptor(s)
         if ( this.FaceDescriptors === true )
@@ -743,7 +746,7 @@ module.exports = function(RED)
             }
             else
             {
-              model_eval = model_eval + '.withFaceDescriptors()';
+              model_array.push('withFaceDescriptors');
             }
           }
           if ( this.Tasks === 'detectSingleFace' )
@@ -754,23 +757,40 @@ module.exports = function(RED)
             }
             else
             {
-              model_eval = model_eval + '.withFaceDescriptor()';
+              model_array.push('withFaceDescriptor');
             }
           }
         }
-        model_eval = model_eval + ';';
-        //msg.model_eval = model_eval;
-        var result;
+
         if ( tensor )
         {
-          try {
-            // actual model execution for image send via msg payload
-            result = await eval(model_eval);
-          }
-          catch (error)
+          var model_array_length = model_array.length;
+          var result;
+          if ( model_array_length === 4 )
           {
-            notify_user_errors(error);
+            result = await faceapi[this.Tasks](tensor, options)[model_array[0]]()[model_array[1]]()[model_array[2]]()[model_array[3]]();
           }
+          if ( model_array_length === 3 )
+          {
+            result = await faceapi[this.Tasks](tensor, options)[model_array[0]]()[model_array[1]]()[model_array[2]]();
+          }
+          if ( model_array_length === 2 )
+          {
+            result = await faceapi[this.Tasks](tensor, options)[model_array[0]]()[model_array[1]]();
+          }
+          if ( model_array_length === 1 )
+          {
+            result = await faceapi[this.Tasks](tensor, options)[model_array[0]]();
+          }
+          if ( model_array_length === 0 )
+          {
+            result = await faceapi[this.Tasks](tensor, options);
+          }
+          //msg.model_eval = model_eval;
+
+
+
+
 
           tensor.dispose();
 
