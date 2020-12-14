@@ -246,7 +246,7 @@ Also this shows how the msg.settings is used. Just un-comment anything you wish 
 Example Flow:
 
 ![persistant_example.jpg](./doc/persistant_example.jpg)
-details>
+<details>
 <summary>Click me for EXAMPLE</summary>
 <p>  
 
@@ -301,6 +301,9 @@ Thanks to:
 
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.28.97 - documentation - fix missing'<' for details
 <br>
 <br>
 version 0.28.96 - documentation - add expand for examples
