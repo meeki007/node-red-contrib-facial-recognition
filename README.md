@@ -255,6 +255,9 @@ Thanks to:
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
+version 0.27.91 - new_feature - zenofmud submitted a fix for MacOS .DS_Store file removal from files
+<br>
+<br>
 version 0.26.91 - bug/new_feature - zenofmud submitted fix for MacOS .DS_Store file removal from folders, and a spelling error
 <br>
 <br>
