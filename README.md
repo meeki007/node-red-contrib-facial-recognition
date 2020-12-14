@@ -303,6 +303,9 @@ Thanks to:
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
+version 0.28.97 - bug - docker post install script
+<br>
+<br>
 version 0.28.97 - documentation - fix missing'<' for details
 <br>
 <br>
