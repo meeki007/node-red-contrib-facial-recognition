@@ -36,6 +36,8 @@ Install with node-red Palette Manager or,
 
 Run the following command in your Node-RED user directory - typically `~/.node-red`:
 
+Windows users: Run all the commands in the [Windows troubleshooting guide](https://github.com/tensorflow/tfjs/blob/master/tfjs-node/WINDOWS_TROUBLESHOOTING.md) from within your Node-RED user directory - typically ~/.node-red
+
 ```
 node-red-contrib-facial-recognition
 ```
@@ -214,7 +216,7 @@ Example Flow:
 
 ## FaceRecognition_Persistant_labeledFaceDescriptors
 
-Note: FaceDetector minConfidence Properties affect the labeledFaceDescriptors. If you have a minConfidence of .9 you may miss a bunch of faces when building your labeledFaceDescriptors.
+Note: FaceDetector minConfidence Properties affect the labeledFaceDescriptors. If you have a minConfidence of .9 you may miss a bunch of faces when building your labeledFaceDescriptors. after you run the node once or supply it a labeledFaceDescriptors from a persistant storage you can set the value to any level you wish for screening the input image you send.
 
 You can save the FaceRecognition labeledFaceDescriptors to persistant storage solution so you don't have to load all the images in your KnownFacesPath folder every time you deploy node red or if node-red/your device restarts.
 
@@ -276,7 +278,10 @@ Thanks to:
 
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
-br>
+<br>
+<br>
+version 0.28.94 - documentation - Windows troubleshooting guide
+<br>
 <br>
 version 0.28.93 - bug - fix disc in JSON file
 <br>
