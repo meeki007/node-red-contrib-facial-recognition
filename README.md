@@ -303,10 +303,10 @@ Thanks to:
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)  faceapi = require
 <br>
 <br>
-version 0.28.98 - bug - fix faceapi = require for gpu, so the gpu option will work and up date documentation for path
+version 0.28.99 - bug - fix faceapi = require for gpu, so the gpu option will work and up date documentation for path
 <br>
 <br>
-version 0.28.97 - bug - docker post install script
+version 0.28.98 - bug - docker post install script
 <br>
 <br>
 version 0.28.97 - documentation - fix missing'<' for details

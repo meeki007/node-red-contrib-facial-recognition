@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-facial-recognition",
-    "version": "0.28.98",
+    "version": "0.28.99",
     "description": "Provides a node-red node for Facial Detection & Facial Recognition.",
     "dependencies": {
       "@vladmandic/face-api": "^0.9.1",
