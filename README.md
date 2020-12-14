@@ -35,12 +35,13 @@ node-red-contrib-facial-recognition
 Install with node-red Palette Manager or,
 
 Run the following command in your Node-RED user directory - typically `~/.node-red`:
-
-Windows users: Run all the commands in the [Windows troubleshooting guide](https://github.com/tensorflow/tfjs/blob/master/tfjs-node/WINDOWS_TROUBLESHOOTING.md) from within your Node-RED user directory - typically ~/.node-red
-
 ```
 node-red-contrib-facial-recognition
 ```
+
+Windows users: Run all the commands in the [Windows troubleshooting guide](https://github.com/tensorflow/tfjs/blob/master/tfjs-node/WINDOWS_TROUBLESHOOTING.md) from within your Node-RED user directory - typically ~/.node-red
+
+
 
 ---
 
@@ -278,6 +279,9 @@ Thanks to:
 
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.28.95 - documentation - correction
 <br>
 <br>
 version 0.28.94 - documentation - Windows troubleshooting guide
