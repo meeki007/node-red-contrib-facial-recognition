@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-facial-recognition",
-    "version": "0.27.91",
+    "version": "0.27.92",
     "description": "Provides a node-red node for password validation; checks that a password meets your defined requierments.",
     "dependencies": {
       "@vladmandic/face-api": "^0.9.1",
