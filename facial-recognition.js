@@ -318,6 +318,10 @@ module.exports = function(RED)
       async function listDirectories(rootPath)
       {
           const fileNames = await fs.promises.readdir(rootPath);
+          if ( fileNames.indexOf(".DS_Store") == 0 ) // if fileNames contains .DS_Store
+          {
+            fileNames.shift();                       // get rid of it
+	        }
           const filePaths = fileNames.map(fileName => path.join(rootPath, fileName));
           const filePathsAndIsDirectoryFlagsPromises = filePaths.map(async filePath => ({path: filePath, isDirectory: (await fs.promises.stat(filePath)).isDirectory()}));
           const filePathsAndIsDirectoryFlags = await Promise.all(filePathsAndIsDirectoryFlagsPromises);
@@ -867,7 +871,7 @@ module.exports = function(RED)
         }
         else
         {
-          notify_user_errors("Input Error: buffered imagae sent is not of valid type. Please send a valid image");
+          notify_user_errors("Input Error: buffered image sent is not of valid type. Please send a valid image");
         }
 
 
