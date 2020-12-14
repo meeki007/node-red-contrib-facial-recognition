@@ -276,6 +276,9 @@ Thanks to:
 
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+br>
+<br>
+version 0.28.93 - bug - fix disc in JSON file
 <br>
 <br>
 version 0.28.92 - new_feature - persistent storage of labeledFaceDescriptors
