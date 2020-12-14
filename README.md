@@ -278,7 +278,7 @@ Thanks to:
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
-version 0.28.92 - new_feature - persistent storeage of labeledFaceDescriptors
+version 0.28.92 - new_feature - persistent storage of labeledFaceDescriptors
 <br>
 <br>
 version 0.27.92 - bug - remove github code mistake
