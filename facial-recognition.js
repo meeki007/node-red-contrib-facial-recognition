@@ -491,8 +491,6 @@ module.exports = function(RED)
           text: "working"
         });
 
-        //see if previous faceMatcher has been populated, it doesn't exist set to false
-        var context_previous_faceMatcher = nodeContext.get('faceMatcher') || false;
         //set user img to node to var
         var user_settings = msg[node.settings.valueOf()];
         //get the msg.name used for for img into node
@@ -587,6 +585,16 @@ module.exports = function(RED)
               if ( user_settings.FaceRecognition.enabled.ReInitializeFaceMatcher === true )
               {
                 nodeContext.set('FaceMatcherInitialized',false);
+                //msg.userset_labeledFaceDescriptors = user_settings.FaceRecognition.enabled.labeledFaceDescriptors;
+              }
+              //Stop FaceMatcher from initalizing and check if user sent labeledFaceDescriptors
+              if ( user_settings.FaceRecognition.enabled.ReInitializeFaceMatcher === false )
+              {
+                if ( user_settings.FaceRecognition.enabled.labeledFaceDescriptors )
+                {
+                nodeContext.set('labeledFaceDescriptors',user_settings.FaceRecognition.enabled.labeledFaceDescriptors);
+                nodeContext.set('FaceMatcherInitialized',true);
+                }
               }
             }
           }
@@ -818,8 +826,11 @@ module.exports = function(RED)
             {
               //see if user wants to ReInitializeFaceMatcher
               const context_FaceMatcherInitialized = nodeContext.get('FaceMatcherInitialized') || false;
-              //context_previous_faceMatcher false or context_FaceMatcherInitialized
-              if ( context_previous_faceMatcher === false || context_FaceMatcherInitialized === false )
+              //see if previous labeledFaceDescriptors has been populated, it doesn't exist set to false
+              var context_labeledFaceDescriptors = nodeContext.get('labeledFaceDescriptors') || false;
+
+              //context_labeledFaceDescriptors false or context_FaceMatcherInitialized
+              if ( context_labeledFaceDescriptors === false || context_FaceMatcherInitialized === false )
               {
                 //check if example path else use user defined dirPath
                 var user_path;
@@ -845,14 +856,20 @@ module.exports = function(RED)
                 //msg.dirs_names_only =list_dirs_in_labeled_face_folder_names_only;
 
                 const labeledFaceDescriptors = await LoadLabeledImages();
-                //msg.labeledFaceDescriptors = labeledFaceDescriptors;
 
-                const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, this.Face_Recognition_distanceThreshold);
-                nodeContext.set('faceMatcher',faceMatcher);
+
+                //use helper toJSON so users can save the FaceDescriptors
+                let labeledFaceDescriptors_toJson = labeledFaceDescriptors.map(x=>x.toJSON());
+                nodeContext.set('labeledFaceDescriptors',labeledFaceDescriptors_toJson);
                 nodeContext.set('FaceMatcherInitialized',true);
-                //msg.faceMatcher = faceMatcher;
               }
-              var faceMatcher = nodeContext.get('faceMatcher');
+
+              context_labeledFaceDescriptors = nodeContext.get('labeledFaceDescriptors');
+              let labeledFaceDescriptors_fromJson = context_labeledFaceDescriptors.map( x=>faceapi.LabeledFaceDescriptors.fromJSON(x));
+              const faceMatcher = await new faceapi.FaceMatcher(labeledFaceDescriptors_fromJson, this.Face_Recognition_distanceThreshold);
+
+
+
 
 
               //sort detections single/multiple faces
@@ -902,6 +919,7 @@ module.exports = function(RED)
           Result : result,
           sec_to_complete : sec_to_complete,
           OriginalBufferedImg : img,
+          labeledFaceDescriptors : context_labeledFaceDescriptors,
           Properties:
           {
             modules:
