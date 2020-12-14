@@ -1,42 +1,4 @@
 
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@meeki007
-Learn Git and GitHub without any code!
-
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-meeki007 /
-node-red-contrib-facial-recognition
-
-1
-0
-
-    1
-
-Code
-Issues
-Pull requests
-Discussions
-Actions
-Projects
-Wiki
-Security
-Insights
-
-    Settings
-
-node-red-contrib-facial-recognition/facial-recognition.js /
-@juggledad
-juggledad changed some tabs to spaces
-Latest commit 7eedfb4 2 hours ago
-History
-2 contributors
-@meeki007
-@juggledad
-981 lines (865 sloc) 34.5 KB
 //2020 David L Burrows
 //Contact me @ https://github.com/meeki007
 //or meeki007@gmail.com
@@ -1019,16 +981,3 @@ module.exports = function(RED)
   RED.nodes.registerType("facial-recognition",facialrecognitionNode);
 
 };
-
-    © 2020 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Help
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
