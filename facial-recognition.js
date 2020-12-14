@@ -42,7 +42,7 @@ module.exports = function(RED)
   let fs        = require('fs'); //Node.js fs module see https://nodejs.dev/learn/the-nodejs-fs-module
   let path      = require('path'); //Node.js path module see https://nodejs.dev/learn/the-nodejs-path-module
   let os        = require('os'); //Node.js os module see https://nodejs.dev/learn/the-nodejs-os-module
-  let faceapi   = require('@vladmandic/face-api/dist/face-api.node.js'); //JavaScript face recognition API for nodejs see https://www.npmjs.com/package/@vladmandic/face-api
+  var faceapi; //value becomes user selection of: require('@vladmandic/face-api/dist/face-api.node.js'); or
   var tf; //value becomes user selection of: require('@tensorflow/tfjs-node'); or require('@tensorflow/tfjs-node-gpu');
 
   ///////////////////////////////////
@@ -124,6 +124,7 @@ module.exports = function(RED)
     {
       found_tfjs_CPU_GPU_module = true;
       tf = require('@tensorflow/tfjs-node');
+      faceapi = require('@vladmandic/face-api/dist/face-api.node.js'); //JavaScript face recognition API for nodejs see https://www.npmjs.com/package/@vladmandic/face-api
     }
     else if ( this.bindings === 'CPU' && tfjs_node_cpu_module_check !== true )
     {
@@ -134,6 +135,7 @@ module.exports = function(RED)
     {
       found_tfjs_CPU_GPU_module = true;
       tf = require('@tensorflow/tfjs-node-gpu');
+      faceapi = require('@vladmandic/face-api/dist/face-api.node-gpu.js'); //JavaScript face recognition API for nodejs see https://www.npmjs.com/package/@vladmandic/face-api
     }
     else if ( this.bindings === 'GPU' && tfjs_node_gpu_module_check !== true )
     {
