@@ -166,7 +166,7 @@ Note: FaceDetector minConfidence Properties affect the labeledFaceDescriptors. I
 
 ![basic_example.jpg](./doc/basic_example.jpg)
 <details>
-<summary>EXAMPLE</summary>
+<summary>Click me for EXAMPLE</summary>
 <p>  
 
 ```
@@ -190,7 +190,7 @@ Note: FaceDetector minConfidence Properties affect the labeledFaceDescriptors. I
 
 ![advanced_example.jpg](./doc/advanced_example.jpg)
 <details>
-<summary>EXAMPLE</summary>
+<summary>Click me for EXAMPLE</summary>
 <p>  
 
 ```
@@ -221,7 +221,7 @@ Example Flow:
 
 ![Heavy_image_processing.jpg](./doc/Heavy_image_processing.jpg)
 details>
-<summary>EXAMPLE</summary>
+<summary>Click me for EXAMPLE</summary>
 <p>  
 
 ```
@@ -247,7 +247,7 @@ Example Flow:
 
 ![persistant_example.jpg](./doc/persistant_example.jpg)
 details>
-<summary>EXAMPLE</summary>
+<summary>Click me for EXAMPLE</summary>
 <p>  
 
 ```
