@@ -321,7 +321,7 @@ module.exports = function(RED)
           if ( fileNames.indexOf(".DS_Store") == 0 ) // if fileNames contains .DS_Store
           {
             fileNames.shift();                       // get rid of it
-	        }
+          }
           const filePaths = fileNames.map(fileName => path.join(rootPath, fileName));
           const filePathsAndIsDirectoryFlagsPromises = filePaths.map(async filePath => ({path: filePath, isDirectory: (await fs.promises.stat(filePath)).isDirectory()}));
           const filePathsAndIsDirectoryFlags = await Promise.all(filePathsAndIsDirectoryFlagsPromises);
@@ -332,6 +332,10 @@ module.exports = function(RED)
       async function listFiles(rootPath)
       {
           const fileNames = await fs.promises.readdir(rootPath);
+          if ( fileNames.indexOf(".DS_Store") == 0 ) // if fileNames contains .DS_Store
+          {
+            fileNames.shift();                       // get rid of it
+          }
           const filePaths = fileNames.map(fileName => path.join(rootPath, fileName));
           const filePathsAndIsFileFlagsPromises = filePaths.map(async filePath => ({path: filePath, isFile: (await fs.promises.stat(filePath)).isFile()}));
           const filePathsAndIsFileFlags = await Promise.all(filePathsAndIsFileFlagsPromises);
