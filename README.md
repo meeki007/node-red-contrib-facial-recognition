@@ -220,7 +220,7 @@ Example Flow:
 [node-red-node-loadbalance](https://flows.nodered.org/node/node-red-contrib-loadbalance)
 
 ![Heavy_image_processing.jpg](./doc/Heavy_image_processing.jpg)
-details>
+<details>
 <summary>Click me for EXAMPLE</summary>
 <p>  
 
