@@ -154,7 +154,7 @@ Computes the locations of each face in an image and returns the bounding boxes w
 <b>disabled</b> - Don't use any facial recognition<br>
 <b>enabled</b> - Performs face recognition, by comparing reference face descriptor(s) to determine the similarity to query face descriptor(s).<br>
 Note: FaceDetector minConfidence Properties affect the labeledFaceDescriptors. If you have a minConfidence of .9 you may miss a bunch of faces when building your labeledFaceDescriptors. after you run the node once or supply it a labeledFaceDescriptors from a persistant storage you can set the value to any level you wish for screening the input image you send<br>
-> - KnownFacesPath - The location of the main folder that contains all subfolders, labeled with persons name. If you change the value of this path you mush use a full path. Example: /home/myuser/name/TheFolderIPutAllTheLabledFaceFolderIn.<br> Subfolders should contain close-up face images of the individual. The actual name if the file in this folder does not matter. Please look at the structure of the example folder for more understanding. The name of the subfolder is what is used to label the faces for facial recognition.<br>
+> - KnownFacesPath - The location of the main folder that contains all subfolders, labeled with persons name. If you change the value of this path you mush use a full path. Example: /home/myuser/name/TheFolderIPutAllTheLabledFaceFolderIn.<br> Subfolders should contain close-up face images of the individual. The actual name of the file in this folder does not matter. Please look at the structure of the example folder for more understanding. The name of the subfolder is what is used to label the faces for facial recognition.<br>
 <b>Note: If you have changed/edited/added images or image folders to your KnownFacesPath you must redeploy the node to ReInitialize the FaceMatcher.</b> On the first image you send, FaceMatcher is ran to process all the images into Labeled Face Descriptors for each dir name and individual descriptions for images. Then it is saved to context and used for Facial Recognition for all future images you send in a message. <br>
 > - distanceThreshold - returns results based on measures of how far away, Euclidean distance of face descriptor, the user submitted image is compared to how far away, Euclidean distance of face descriptors, it is to all the faces found in the labeled subfolder that are above the distanceThreshold. <b>Simply put: return names for person if it is this distanceThreshold of confidence.</b> The lower the distanceThreshold is the more likely you are to get a incorrect match. The higher the distanceThreshold is the more likely it is that a person will not be recognized.
 
@@ -217,7 +217,7 @@ Example Flow:
 
 <b>NOTE: other node-red nodes required</b>
 
-[node-red-node-loadbalance](https://flows.nodered.org/node/node-red-contrib-loadbalance)
+[node-red-contrib-loadbalance](https://flows.nodered.org/node/node-red-contrib-loadbalance)
 
 ![Heavy_image_processing.jpg](./doc/Heavy_image_processing.jpg)
 <details>
@@ -297,10 +297,16 @@ Thanks to:
 
 [zenofmud](https://discourse.nodered.org/u/zenofmud/summary) for bug fixes and new feature.
 
+[M0ebiu5](https://discourse.nodered.org/u/moebius/summary) for helping change the logic of KnownFacesPath
+
+
 ---
 
 ## release notes ##
-0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)  faceapi = require
+0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.28.100 - bug - M0ebiu5 change the logic of KnownFacesPath
 <br>
 <br>
 version 0.28.99 - bug - fix faceapi = require for gpu, so the gpu option will work and up date documentation for path
