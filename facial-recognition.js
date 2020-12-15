@@ -114,7 +114,7 @@ module.exports = function(RED)
     this.AgeAndGender = config.AgeAndGender || false;
     this.FaceDescriptors = config.FaceDescriptors || false;
     this.Face_Recognition = config.Face_Recognition || 'Face_Recognition_disabled';
-    this.Face_Recognition_enabled_path = config.Face_Recognition_enabled_path || '/example/labeled_face';
+    this.Face_Recognition_enabled_path = config.Face_Recognition_enabled_path || 'FullPathToLabeledFaces';
     this.Face_Recognition_distanceThreshold = Number(config.Face_Recognition_distanceThreshold || 0.7);
 
     //require modules based on user input to node image bindings
@@ -836,7 +836,7 @@ module.exports = function(RED)
               {
                 //check if example path else use user defined dirPath
                 var user_path;
-                if ( this.Face_Recognition_enabled_path === '/example/labeled_face' )
+                if ( this.Face_Recognition_enabled_path === 'FullPathToLabeledFaces' || this.Face_Recognition_enabled_path === '/example/labeled_face' )
                 {
                   user_path = path.join(__dirname, '/example/labeled_face');
                 }
