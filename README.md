@@ -205,7 +205,7 @@ Example Flow:
 
 <b>NOTE: other node-red nodes required</b>
 
-[node-red-contrib-loadbalance](https://flows.nodered.org/node/node-red-contrib-loadbalance)
+[node-red-contrib-msg-router](https://flows.nodered.org/node/node-red-contrib-msg-router)
 
 ![Heavy_image_processing.jpg](./doc/Heavy_image_processing.jpg)
 
@@ -272,9 +272,12 @@ Thanks to:
 
 
 ---
-
+Heavy_image_processing_or_mjpeg_video_stream
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.28.103 - documentation - Switched to using msg-router for Heavy_image_processing_or_mjpeg_video_stream
 <br>
 <br>
 version 0.28.102 - bug - fix how README.md is displayed on web pages
