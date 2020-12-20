@@ -10,6 +10,7 @@ node-red-contrib-facial-recognition
 ---
 
 ## Table of Contents
+* [Requirements](#Requirements)
 * [Install](#install)
 * [About](#About)
 * [Usage](#usage)
@@ -30,17 +31,25 @@ node-red-contrib-facial-recognition
 
 ---
 
+## Requirements
+
+Node version 12.x or higher. Use `node -v` in terminal to find out
+Node-red version 1.x or higher.
+
+---
+
 ## Install
 
 Install with node-red Palette Manager or,
 
 Run the following command in your Node-RED user directory - typically `~/.node-red`:
 ```
-node-red-contrib-facial-recognition
+npm install node-red-contrib-facial-recognition
 ```
 
-Windows users: If your having issues and use the trouble shooting guide. Run the commands in the [Windows troubleshooting guide](https://github.com/tensorflow/tfjs/blob/master/tfjs-node/WINDOWS_TROUBLESHOOTING.md) from within your Node-RED user directory - typically ~/.node-red
+**Windows users:** If your having issues and use the trouble shooting guide. Run the commands in the [Windows troubleshooting guide](https://github.com/tensorflow/tfjs/blob/master/tfjs-node/WINDOWS_TROUBLESHOOTING.md) from within your Node-RED user directory - typically ~/.node-red
 
+**Docker users:** Node-red's official docker will not work. It is based on alpine and is not `libc6` compatible. Please see this thread for how to install a docker version of node-red that works. [https://discourse.nodered.org/t/announce-node-red-contrib-facial-recognition/37384/53](https://discourse.nodered.org/t/announce-node-red-contrib-facial-recognition/37384/53)
 
 
 ---
@@ -275,6 +284,12 @@ Thanks to:
 Heavy_image_processing_or_mjpeg_video_stream
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.29.104 - new_feature - Checks for node version greather than 12, added checks for @vladmandic/face-api
+<br>
+<br>
+version 0.28.104 - documentation - Added Docker use info and Requirements section
 <br>
 <br>
 version 0.28.103 - documentation - Switched to using msg-router for Heavy_image_processing_or_mjpeg_video_stream
