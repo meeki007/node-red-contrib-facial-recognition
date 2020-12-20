@@ -34,6 +34,7 @@ node-red-contrib-facial-recognition
 ## Requirements
 
 Node version 12.x or higher. Use `node -v` in terminal to find out
+
 Node-red version 1.x or higher.
 
 ---
