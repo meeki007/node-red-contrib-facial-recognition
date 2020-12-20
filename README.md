@@ -154,8 +154,8 @@ Computes the locations of each face in an image and returns the bounding boxes w
 
 ### Tasks
 
-<b>detectAllFaces</b> - Utilize the selected FaceDetector to detect multiple faces in a buffered image sent in message by user<br>
-<b>detectSingleFace</b> - Utilize the selected FaceDetector to detect a single face in a buffered image sent in message by user. If image contains multiple faces it will only detect one of them, hopefully the highest probability one.<br>
+<b>detectAllFaces</b> - Returns an array of objects. Utilize the selected FaceDetector to detect multiple faces in a buffered image sent in message by user<br>
+<b>detectSingleFace</b> - Returns an object. Utilize the selected FaceDetector to detect a single face in a buffered image sent in message by user. If image contains multiple faces it will only detect one of them, hopefully the highest probability one.<br>
 > - withFaceLandmarks - computes landmarks for each detected face(s)<br>
 > - withFaceExpressions - recognize face expressions of each face(s)<br>
 > - withAgeAndGender - estimate age and recognize gender of each face(s)<br>
