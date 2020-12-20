@@ -67,7 +67,10 @@ module.exports = function(RED)
   //////////////////////////////////////////////////////////////
   // Stuff to do / load before loading/constructing this node //
   //////////////////////////////////////////////////////////////
-
+  // check if module @vladmandic/face-api/dist/face-api.node.js is installed and working;
+  let vladmandic_faceapi_node_module_check = module_check('@vladmandic/face-api/dist/face-api.node.js');
+  // check if module @vladmandic/face-api/dist/face-api.node-gpu.js is installed and working;
+  let vladmandic_faceapi_node_gpu_module_check = module_check('@vladmandic/face-api/dist/face-api.node-gpu.js');
   // check if module @tensorflow/tfjs-node [GPU] is installed and working;
   let tfjs_node_gpu_module_check = module_check('@tensorflow/tfjs-node-gpu');
   // check if module @tensorflow/tfjs-node [CPU] is installed and working;
@@ -120,27 +123,44 @@ module.exports = function(RED)
     //require modules based on user input to node image bindings
     //warn user if bindings selection is not valid for lack of module
     var found_tfjs_CPU_GPU_module;
-    if ( this.bindings === 'CPU' && tfjs_node_cpu_module_check === true )
+    var found_vladmandic_faceapi_module;
+    if ( this.bindings === 'CPU' && tfjs_node_cpu_module_check === true && vladmandic_faceapi_node_module_check === true )
     {
       found_tfjs_CPU_GPU_module = true;
       tf = require('@tensorflow/tfjs-node');
       faceapi = require('@vladmandic/face-api/dist/face-api.node.js'); //JavaScript face recognition API for nodejs see https://www.npmjs.com/package/@vladmandic/face-api
     }
-    else if ( this.bindings === 'CPU' && tfjs_node_cpu_module_check !== true )
+    else if ( this.bindings === 'CPU' && tfjs_node_cpu_module_check !== true || vladmandic_faceapi_node_module_check !== true )
     {
-      found_tfjs_CPU_GPU_module = "Error: " + tfjs_node_cpu_module_check + " - Unable to use @tensorflow/tfjs-node; CPU binding. See this node's documentation and Make sure that module @tensorflow/tfjs-node is properly working & installed under your Node-RED user directory, typically ~/.node-red";
-      this.warn(found_tfjs_CPU_GPU_module);
+      if ( vladmandic_faceapi_node_module_check !== true )
+      {
+        found_vladmandic_faceapi_module = "Error: " + vladmandic_faceapi_node_module_check + " - Unable to use @vladmandic/face-api/dist/face-api.node.js; CPU binding. Check your loggs when installing. See this node's documentation and Make sure that module @tensorflow/tfjs-node is properly working & installed under your Node-RED user directory, typically ~/.node-red";
+        this.warn(found_vladmandic_faceapi_module);
+      }
+      if ( tfjs_node_cpu_module_check !== true )
+      {
+        found_tfjs_CPU_GPU_module = "Error: " + tfjs_node_cpu_module_check + " - Unable to use @tensorflow/tfjs-node; CPU binding. Check your loggs when installing. See this node's documentation and Make sure that module @tensorflow/tfjs-node is properly working & installed under your Node-RED user directory, typically ~/.node-red";
+        this.warn(found_tfjs_CPU_GPU_module);
+      }
     }
-    else if ( this.bindings === 'GPU' && tfjs_node_gpu_module_check === true )
+    else if ( this.bindings === 'GPU' && tfjs_node_gpu_module_check === true && vladmandic_faceapi_node_gpu_module_check === true )
     {
       found_tfjs_CPU_GPU_module = true;
       tf = require('@tensorflow/tfjs-node-gpu');
       faceapi = require('@vladmandic/face-api/dist/face-api.node-gpu.js'); //JavaScript face recognition API for nodejs see https://www.npmjs.com/package/@vladmandic/face-api
     }
-    else if ( this.bindings === 'GPU' && tfjs_node_gpu_module_check !== true )
+    else if ( this.bindings === 'GPU' && tfjs_node_gpu_module_check !== true || vladmandic_faceapi_node_gpu_module_check !== true )
     {
-      found_tfjs_CPU_GPU_module = "Error: " + tfjs_node_gpu_module_check + " - Unable to use @tensorflow/tfjs-node-gpu; GPU binding. See this node's documentation and Make sure that module @tensorflow/tfjs-node-gpu is properly working & installed under your Node-RED user directory, typically ~/.node-red";
-      this.warn(found_tfjs_CPU_GPU_module);
+      if ( vladmandic_faceapi_node_gpu_module_check !== true )
+      {
+        found_vladmandic_faceapi_module = "Error: " + vladmandic_faceapi_node_module_check + " - Unable to use @vladmandic/face-api/dist/face-api.node-gpu.js; CPU binding. Check your loggs when installing. See this node's documentation and Make sure that module @tensorflow/tfjs-node is properly working & installed under your Node-RED user directory, typically ~/.node-red";
+        this.warn(found_vladmandic_faceapi_module);
+      }
+      if ( tfjs_node_gpu_module_check !== true )
+      {
+        found_tfjs_CPU_GPU_module = "Error: " + tfjs_node_gpu_module_check + " - Unable to use @tensorflow/tfjs-node-gpu; GPU binding. Check your loggs when installing. See this node's documentation and Make sure that module @tensorflow/tfjs-node-gpu is properly working & installed under your Node-RED user directory, typically ~/.node-red";
+        this.warn(found_tfjs_CPU_GPU_module);
+      }
     }
 
     //clear status icon every new deploy
@@ -456,6 +476,10 @@ module.exports = function(RED)
       if ( !img ) //is falsy
       {
         notify_user_errors("message image msg." + img_name + " is falsy! no img or img value found for msg." + img_name + " , please send this node a image. like a *.png *.gif *.jpg *.bmp");
+      }
+      if ( found_vladmandic_faceapi_module !== true )
+      {
+        notify_user_errors(found_vladmandic_faceapi_module);
       }
       if ( found_tfjs_CPU_GPU_module !== true )
       {
@@ -978,7 +1002,7 @@ module.exports = function(RED)
           shape: 'dot',
           text: "finished"
         });
-        // clear/end status msg after 3 seconds
+        // clear/end status msg after 1 seconds
         setTimeout(status_clear, 1000);
 
 
