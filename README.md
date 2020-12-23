@@ -22,6 +22,7 @@ node-red-contrib-facial-recognition
   * [FaceDetector](#FaceDetector)
   * [FaceRecognition](#FaceRecognition)
 * [Example_Flows](#Example_Flows)
+* [Simple_Queue_Method](#Simple_Queue_Method)
 * [Heavy_image_processing_or_mjpeg_video_stream](#Heavy_image_processing_or_mjpeg_video_stream)
 * [FaceRecognition_Persistant_labeledFaceDescriptors](#FaceRecognition_Persistant_labeledFaceDescriptors)
 * [Bugs_Feature_request](#Bugs_Feature_request)
@@ -197,6 +198,24 @@ Note: FaceDetector minConfidence Properties affect the labeledFaceDescriptors. I
 
 [Click Me For Advanced example](https://raw.githubusercontent.com/meeki007/node-red-contrib-facial-recognition/main/doc/advanced)
 
+---
+
+## Simple_Queue_Method
+
+If your having issues with overloading the node with too many images that tensorflow can't handle you can always add a Queue
+
+This will take up ram as the queue grows and tensorflow is ram hungry. Only use this method if the queue will decrease in time. Don't let it grow out of control.
+
+Example Flow:
+
+<b>NOTE: other node-red nodes required</b>
+
+[node-red-contrib-simple-message-queue](https://flows.nodered.org/node/node-red-contrib-simple-message-queue)
+
+![q-method.jpg](./doc/q-method.jpg)
+
+[Click Me For Simple_Queue_Method example](https://raw.githubusercontent.com/meeki007/node-red-contrib-facial-recognition/main/doc/qMethodExample)
+
 
 ---
 
@@ -285,6 +304,9 @@ Thanks to:
 Heavy_image_processing_or_mjpeg_video_stream
 ## release notes ##
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
+<br>
+<br>
+version 0.29.105 - documentation - Added queue documentation, added documentaion for array / object
 <br>
 <br>
 version 0.29.104 - new_feature - Checks for node version greather than 12, added checks for @vladmandic/face-api
