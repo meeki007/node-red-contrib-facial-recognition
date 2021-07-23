@@ -306,6 +306,9 @@ Heavy_image_processing_or_mjpeg_video_stream
 0.0.0 = (majorchange) . (new_feature) . (bugfix-simple_mod)
 <br>
 <br>
+version 0.30.105 - new_feature - Updated to use tfjs-node 3.7.0 or higher, face-api 1.3.1 or higher, fixes the agent requierment of 6.x or higher
+<br>
+<br>
 version 0.29.105 - documentation - Added queue documentation, added documentaion for array / object
 <br>
 <br>
